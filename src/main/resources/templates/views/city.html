@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:p="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" href="../../css/bootstrap.css" />
+    <script th:src="@{/js/jquery-2.1.1.js}"
+            src="../../js/jquery-2.1.1.js" />
+
+    <script th:src="@{/js/bootstrap.bundle.js}"
+            src="../../js/bootstrap.bundle.js" />
+
+</head>
+<body>
+<div class = "row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <br/><h4>Таблица: "Города"</h4><br/>
+        <table class="table table-bordered table-hover" id = "cityTable">
+            <thead class="thead-dark">
+            <tr>
+                <th style="width:75%">#</th>
+                <th style="width:25%">Город</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="city : ${cities}">
+                <td th:text="${{city.name}}"></td>
+                <td>
+                    <button th:id = "${{city.id}}"
+                            type="button"
+                            class="btn btn-success btn-sm"
+                            data-toggle="modal"
+                            onclick = "getRow(this)"
+                            data-target="#updateModal">Изменить
+                    </button>
+                    &nbsp;
+                    <a th:href="${{'/home/city/delete?id=' + city.id}}"><button type="button" class="btn btn-danger btn-sm">Удалить</button></a>&nbsp;
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#addModal">+</button>&nbsp;
+
+    </div>
+    <div class="col-1"></div>
+</div>
+<!-- Modal Update -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateCityLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateCityLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <form action="/home/city/update" method="post" name = "updateForm">
+                <div class="modal-body">
+                    <input name = "id" type = "hidden" id = "idCity" value = "0"/>
+                    <div class="form-group">
+                        <label for="updateNameCity">Название города</label>
+                        <input name = "city" type="text" class="form-control" id = "updateNameCity"/>
+                        <small id="test1" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Add -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавление города</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <form action="/home/city/add" method="post" name = "addForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputCity">Название города</label>
+                        <input name = "nameCity" type="text" class="form-control" id = "exampleInputCity"/>
+                        <small id="test2" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary" >Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function getRow(obj){
+        var currentId = obj.parentNode.parentNode.rowIndex;;
+        var table = document.getElementById("cityTable");
+
+        document.getElementById("updateNameCity").value = table.rows[currentId].cells[0].innerHTML;
+        document.getElementById("updateCityLabel").innerHTML = "Город №" + table.rows[currentId].cells[0].innerHTML;
+        document.getElementById("idCity").value = obj.id;
+    }
+</script>
+</html>

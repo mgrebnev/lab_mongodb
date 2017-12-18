@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" href="../../css/bootstrap.css" />
+    <script th:src="@{/js/jquery-2.1.1.js}"
+            src="../../js/jquery-2.1.1.js" />
+
+    <script th:src="@{/js/bootstrap.bundle.js}"
+            src="../../js/bootstrap.bundle.js" />
+
+</head>
+<body style = "background: #F8F8F8">
+<div class="container">
+    <div class = "row">
+        <div class = "col-3"></div>
+        <div class="col-6">
+            <br/>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action text-white text-center active"><h3>Таблицы</h3></li>
+                <a href="/home/city" class="list-group-item list-group-item-action text-primary text-center"><h5>Города</h5></a>
+                <a href="#" class="list-group-item list-group-item-action text-primary text-center"><h5>Магазины</h5></a>
+                <a href="#" class="list-group-item list-group-item-action text-primary text-center"><h5>Продукция</h5></a>
+            </ul>
+        </div>
+        <div class = "col-3"></div>
+    </div>
+</div>
+</body>
+</html>
