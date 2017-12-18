@@ -17,31 +17,35 @@
     <div class="col-1"></div>
     <div class="col-10">
         <br/><h4>Таблица: "Города"</h4><br/>
-        <table class="table table-bordered table-hover" id = "cityTable">
-            <thead class="thead-dark">
-            <tr>
-                <th style="width:75%">Город</th>
-                <th style="width:25%">Действие</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="city : ${cities}">
-                <td th:text="${{city.name}}"></td>
-                <td>
-                    <button th:id = "${{city.id}}"
-                            type="button"
-                            class="btn btn-success btn-sm"
-                            data-toggle="modal"
-                            onclick = "getRow(this)"
-                            data-target="#updateModal">Изменить
-                    </button>
-                    &nbsp;
-                    <a th:href="${{'/home/city/delete?id=' + city.id}}"><button type="button" class="btn btn-danger btn-sm">Удалить</button></a>&nbsp;
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
+        <div th:if ="${citySize > 0}">
+            <table class="table table-bordered table-hover" id = "cityTable">
+                <thead class="thead-dark">
+                <tr>
+                    <th style="width:75%">Город</th>
+                    <th style="width:25%">Действие</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="city : ${cities}">
+                    <td th:text="${{city.name}}"></td>
+                    <td>
+                        <button th:id = "${{city.id}}"
+                                type="button"
+                                class="btn btn-success btn-sm"
+                                data-toggle="modal"
+                                onclick = "getRow(this)"
+                                data-target="#updateModal">Изменить
+                        </button>
+                        &nbsp;
+                        <a th:href="${{'/home/city/delete?id=' + city.id}}"><button type="button" class="btn btn-danger btn-sm">Удалить</button></a>&nbsp;
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if ="${citySize == 0}">
+            <h3>В таблице нет данных</h3><br/>
+        </div>
         <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#addModal">+</button>&nbsp;
 
     </div>

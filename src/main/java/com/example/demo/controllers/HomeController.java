@@ -28,6 +28,7 @@ public class HomeController {
     public String city(Map<String, Object> model){
         List<City> cityList = cityService.getAll();
         model.put("cities",cityList);
+        model.put("citySize",cityList.size());
         return "city";
     }
 
